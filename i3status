@@ -1,0 +1,38 @@
+# i3 status config
+general {
+	colors = false
+	markup = pango
+	interval = 5
+}
+order += "volume 0"
+order += "memory"
+order += "cpu_usage"
+order += "cpu_temperature 0"
+order += "battery 0"
+order += "tztime 0"
+volume 0 {
+	format = "<span color='#bd93f9'>VOL</span> %volume"
+	format_muted = "<span color='#bd93f9'>muted</span>"
+	device = "pulse"
+}
+memory {
+	format = "<span color='#bd93f9'>RAM</span> %percentage_used %used / %total"
+}
+cpu_usage {
+	format = "<span color='#bd93f9'>CPU</span> %usage"
+}
+cpu_temperature 0 {
+	format = "<span color='#bd93f9'>TMP</span> %degrees°C"
+	path = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input"
+}
+battery 0 {
+	format = "<span color='#bd93f9'>%status</span> %percentage - %remaining - %consumption"
+	last_full_capacity = true
+	status_full = "FULL"
+	status_chr = "BAT+"
+	status_bat = "BAT"
+	status_unk = "BAT?"
+}
+tztime 0 {
+	format = "<span color='#bd93f9'>%Y-%m-%d</span> %l:%M %p"
+}

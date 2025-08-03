@@ -1,0 +1,52 @@
+* {
+	border: none;
+	border-radius: 0;
+	font-family: Cantarell;
+	font-size: 14px;
+	min-height: 0;
+	color: #F8F8F2;
+}
+
+window#waybar {
+	background: #11111B;
+}
+
+#window {
+	font-weight: bold;
+}
+
+#workspaces button {
+	padding: 0px;
+	padding-left: 4px;
+	padding-right: 4px;
+	background: transparent;
+	border-top: 2px solid transparent;
+}
+
+#workspaces button.focused {
+	color: #A6E3A1;
+	border-top: 2px solid;
+}
+
+#workspaces button.active {
+	color: #A6E3A1;
+	border-top: 2px solid;
+}
+
+#mode {
+	background: #FF5555;
+}
+
+#battery, #cpu, #memory, #pulseaudio, #mode {
+	margin-left: 10px;
+}
+
+#clock {
+	font-weight: bold;
+}
+
+@keyframes blink {
+	to {
+		background-color: #FF5555;
+	}
+}

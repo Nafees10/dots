@@ -1,0 +1,7 @@
+[user]
+	email = nafeeshassan16@gmail.com
+	name = Nafees Hassan
+[credential "https://github.com"]
+	username = Nafees10
+[init]
+	defaultBranch = master

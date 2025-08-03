@@ -1,0 +1,11 @@
+- JOB: "intercept -g $DEVNODE | dbt | 1806 | uinput -d $DEVNODE"
+  DEVICE:
+    EVENTS:
+      EV_KEY: [KEY_W, KEY_A, KEY_S, KEY_D, KEY_F]
+    #NAME: ".*((k|K)(eyboard|EYBOARD)|).*"
+    NAME: "^(?!.*MOUSE).*$"
+- JOB: "intercept -g $DEVNODE | msw | uinput -d $DEVNODE"
+  DEVICE:
+    EVENTS:
+      EV_REL: [REL_WHEEL]
+    NAME: ".*USB.*MOUSE.*"

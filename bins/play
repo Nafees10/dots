@@ -1,0 +1,32 @@
+#!/bin/bash
+DIR="$HOME/.config/play/"
+if [ $# -le 1 ]; then
+	echo "not enough arguments provided.";
+	echo "usage:";
+	echo "	play category playlist [regexFilter]"
+	echo "	play category folder [regexFilter]";
+	exit 1
+fi
+if [[ -d "$DIR/$1" ]]; then
+	if [[ -f "$DIR/$1/lists/$2.m3u" ]]; then
+		if [ $# = 3 ]; then
+			cat "$DIR/$1/lists/$2.m3u" | grep -E "$3" > "$DIR/tmp.m3u";
+			#if [[ -f "$DIR/$1/lists/$2.png" ]]; then
+			#	rm "$DIR/tmp.png" &> /dev/null
+			#	cp "$DIR/$1/lists/$2.png" "$DIR/tmp.png";
+			#fi
+			mpv --no-video "$DIR/tmp.m3u" --player-operation-mode=pseudo-gui &> /dev/null &
+		else
+			mpv --no-video "$DIR/$1/lists/$2.m3u" --player-operation-mode=pseudo-gui &> \
+				/dev/null &
+		fi
+	elif [[ -d "$DIR/$1/lists/$2" ]]; then
+		if [ $# = 3 ]; then
+			ls "$DIR/$1/lists/$2" --sort=time | grep -E "$3" > "$DIR/tmp.m3u"
+			mpv --no-video "$DIR/tmp.m3u" --player-operation-mode=pseudo-gui &> /dev/null &
+		else
+			mpv --no-video "$DIR/$1/lists/$2.m3u" --player-operation-mode=pseudo-gui &> \
+				/dev/null &
+		fi
+	fi
+fi

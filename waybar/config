@@ -1,0 +1,69 @@
+{
+	"layer": "top",
+	"position": "top",
+	"height": 24,
+	"modules-left": ["privacy", "tray", "clock", "hyprland/workspaces",
+		"hyprland/mode"],
+	"modules-center": ["hyprland/window"],
+	"modules-right": ["network", "pulseaudio", "memory", "battery"],
+	"hyprland/workspaces": {
+		"disable-scroll": true,
+		"all-outputs": false,
+		"format": "{icon}",
+		"format-icons": {
+			"1": "q",
+			"2": "w",
+			"3": "e",
+			"4": "r",
+			"5": "a",
+			"6": "s",
+			"7": "d",
+			"8": "f",
+			"9": "z",
+			"10": "x",
+			"11": "c",
+			"12": "v"
+		}
+	},
+	"hyprland/mode": {
+		"format": "{}"
+	},
+	"hyprland/window": {
+		"format": "{title}",
+		"tooltip": false
+	},
+	"tray": {
+		"icon-size": 21,
+		"spacing": 10
+	},
+	"clock": {
+		"format": "{:%Y-%m-%d %I:%M %p} |",
+		"interval": 10
+	},
+	"network": {
+		"format": "󰩟 {ipaddr} ↑{bandwidthUpBytes} ↓{bandwidthDownBytes}",
+		"format-disconnected": "󰩟 NULL",
+		"tooltip": false,
+		"interval": 3
+	},
+	"pulseaudio": {
+		"scroll-step": 0,
+		"format": "󰕾 {volume}% {format_source}",
+		"format-muted": "󰸈 {format_source}",
+		"format-source": "",
+		"format-source-muted": "",
+		"tooltip": false
+	},
+	"memory": {
+		"format": "󰍛 {used:.1f}GiB",
+		"tooltip": false,
+		"interval": 3
+	},
+	"battery": {
+		"bat": "BAT0",
+		"interval": 3,
+		"format": "󰁹 {capacity}%-{power:.1f}W {time}",
+		"format-charging": "󰁹 {capacity}%+{power:.1f}W",
+		"tooltip": false
+	}
+}
