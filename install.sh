@@ -10,6 +10,7 @@ mkdir $HOME/.config/mako/
 mkdir $HOME/.config/hypr/
 mkdir $HOME/.config/wireplumber
 mkdir $HOME/.config/wireplumber/wireplumber.conf.d
+mkdir $HOME/.omnisharp
 
 ln -s $PWD/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 ln -s $PWD/htoprc $HOME/.config/htop/htoprc
@@ -30,3 +31,4 @@ ln -s $PWD/waybar/style.css $HOME/.config/waybar/style.css
 ln -s $PWD/makoconfig $HOME/.config/mako/config
 ln -s $PWD/wireplumber-nocamera.conf \
 	$HOME/.config/wireplumber/wireplumber.conf.d/10-disable-camera.conf
+ln -s $PWD/omnisharp.json $HOME/.omnisharp/omnisharp.json
