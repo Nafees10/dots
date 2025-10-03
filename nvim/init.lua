@@ -180,21 +180,17 @@ local on_attach = function(client, bufnr)
 	map("n", "<leader>a", vim.lsp.buf.code_action, opts)
 end
 
-local lspconfig = require("lspconfig")
 local servers = {
 	"serve_d", "clangd", "gopls", "pyright", "jdtls",
 	"ts_ls", "jsonls", "eslint", "cssls", "html"
 }
 for _, server in ipairs(servers) do
-	lspconfig[server].setup {
+	vim.lsp.config(server, {
 		on_attach = on_attach,
-	}
+	})
 end
 
-lspconfig.omnisharp.setup {
-	on_attach = on_attach,
-	cmd = { "omnisharp" },
-}
+vim.lsp.enable(servers)
 
 -- Treesitter
 require("nvim-treesitter.configs").setup {
