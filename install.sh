@@ -7,7 +7,6 @@ mkdir $HOME/.config/mpv/
 mkdir $HOME/.config/sway/
 mkdir $HOME/.config/waybar/
 mkdir $HOME/.config/mako/
-mkdir $HOME/.config/hypr/
 mkdir $HOME/.config/wireplumber
 mkdir $HOME/.config/wireplumber/wireplumber.conf.d
 mkdir $HOME/.omnisharp
@@ -19,7 +18,6 @@ ln -s $PWD/i3status $HOME/.config/i3/i3status
 ln -s $PWD/mpv.conf $HOME/.config/mpv/mpv.conf
 ln -s $PWD/nvim/ $HOME/.config/nvim
 ln -s $PWD/swayconfig $HOME/.config/sway/config
-ln -s $PWD/hyprland.conf $HOME/.config/hypr/hyprland.conf
 ln -s $PWD/bins/ $HOME/.local/bin
 ln -s $PWD/bash/aliases $HOME/.bash_aliases
 ln -s $PWD/bash/profile $HOME/.bash_profile

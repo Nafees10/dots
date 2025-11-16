@@ -7,60 +7,36 @@ exec --no-startup-id mako
 output * bg /home/$USER/Pictures/wallpapers/02.png fill
 
 output eDP-1 scale 1.25 position 0,0 mode 1920x1080@47.999Hz
-output DP-1 transform 270 position 3080,0
+output HDMI-A-1 position -1600,0
 
 exec --no-startup-id rfkill block bluetooth
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-#exec --no-startup-id /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-kde
-exec --no-startup-id /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-gtk
-
 default_border none
-#gaps inner 6
-#gaps outer -7
-#smart_gaps on
-#smart_gaps inverse_outer
-#smart_borders on
-#smart_borders no_gaps
+smart_gaps on
+gaps inner 4
+gaps outer 0
 
 for_window [shell="xwayland"] title_format "%title <small>[XWayland]</small>"
 
 font pango:Cantarell 14
 
-exec --no-startup-id dex --autostart --environment sway
-
 bindsym $mod+o exec --no-startup-id swaylock -c 282A36
 
 bindsym $mod+m exec --no-startup-id monitor_switch
 
-exec --no-startup-id nm-applet --indicator
-
-input "1739:0:Synaptics_tm2964-001" {
-	pointer_accel 0.3
+input type:touchpad {
+	pointer_accel 0.4
 	natural_scroll enabled
 	tap enabled
 	dwt disabled
 }
 
-input "1:1:AT_Translated_Set_2_keyboard" {
-	xkb_layout gb
-}
-
-input "keyboard" {
-	xkb_layout us
-}
-
-#exec swayidle -w \
-#	timeout 180 'swaylock -f -c 282A36' \
-#	timeout 210 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#	before-sleep 'swaylock -f -c 282A36'
-
 exec swayidle -w \
 	timeout 10 'if pgrep -x swaylock; then swaymsg "output * power off"; fi' \
 	resume 'swaymsg "output * power on"' \
 	before-sleep 'swaylock -f -c 282A36'
-
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -72,7 +48,7 @@ bindsym Mod1+Tab exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ tog
 
 ## Clipboard Screenshots
 bindsym Mod1+p exec --no-startup-id grim - | wl-copy
-bindsym Mod1+Shift+p exec --no-startup-id grim -g "$(slurp -d)" - | wl-copy
+bindsym Mod1+Shift+p exec sh -c 'grim -g "$(slurp -d)" - | wl-copy'
 
 floating_modifier $mod
 
@@ -85,7 +61,7 @@ bindsym Mod4+b exec --no-startup-id Thunar
 # kill focused window
 bindsym Mod1+4 kill
 
-bindsym Ctrl+Escape exec --no-startup-id "TERMINAL=alacritty rofi -modi drun,run -show drun"
+bindsym Ctrl+Escape exec --no-startup-id "TERMINAL=alacritty kickoff"
 
 # change focus
 bindsym Mod1+h focus left
@@ -99,27 +75,23 @@ bindsym $mod+j move down
 bindsym $mod+k move up
 bindsym $mod+l move right
 
-# split in horizontal orientation
-bindsym Mod4+Shift+v split toggle
-
-# enter fullscreen mode for the focused container
+bindsym Mod1+b split toggle
 bindsym Mod1+3 fullscreen toggle
-
-# toggle tiling / floating
 bindsym Mod1+2 floating toggle
 
-workspace 1 output eDP-1
-workspace 2 output eDP-1
-workspace 3 output eDP-1
-workspace 4 output DP-1
+workspace 1 output HDMI-A-1
+workspace 2 output HDMI-A-1
+workspace 3 output HDMI-A-1
+workspace 4 output HDMI-A-1
 workspace 5 output eDP-1
 workspace 6 output eDP-1
 workspace 7 output eDP-1
-workspace 8 output DP-1
+workspace 8 output eDP-1
 workspace 9 output eDP-1
 workspace 10 output eDP-1
 workspace 11 output eDP-1
-workspace 12 output DP-1
+workspace 12 output eDP-1
+
 
 bindsym Mod1+q workspace 1
 bindsym Mod1+w workspace 2
@@ -153,15 +125,10 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 mode "resize" {
-	bindsym h resize shrink width 5 px or 5 ppt
-	bindsym j resize grow height 5 px or 5 ppt
-	bindsym k resize shrink height 5 px or 5 ppt
-	bindsym l resize grow width 5 px or 5 ppt
-
-	bindsym Left resize shrink width 5 px or 5 ppt
-	bindsym Down resize grow height 5 px or 5 ppt
-	bindsym Up resize shrink height 5 px or 5 ppt
-	bindsym Right resize grow width 5 px or 5 ppt
+	bindsym h resize shrink width 2 px or 2 ppt
+	bindsym j resize grow height 2 px or 2 ppt
+	bindsym k resize shrink height 2 px or 2 ppt
+	bindsym l resize grow width 2 px or 2 ppt
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -172,5 +139,3 @@ bindsym $mod+Tab mode "resize"
 
 exec --no-startup-id killall waybar
 exec --no-startup-id waybar
-exec --no-startup-id /usr/lib/xdg-desktop-portal -r & /usr/lib/xdg-desktop-portal-wlr
-exec --no-startup-id autotiling
