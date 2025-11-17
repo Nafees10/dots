@@ -7,7 +7,7 @@ exec --no-startup-id mako
 output * bg /home/$USER/Pictures/wallpapers/02.png fill
 
 output eDP-1 scale 1.25 position 0,0 mode 1920x1080@47.999Hz
-output HDMI-A-1 position -1600,0
+output HDMI-A-1 position 0,-2000
 
 exec --no-startup-id rfkill block bluetooth
 
@@ -137,5 +137,4 @@ mode "resize" {
 
 bindsym $mod+Tab mode "resize"
 
-exec --no-startup-id killall waybar
-exec --no-startup-id waybar
+exec --no-startup-id killall waybar; waybar
