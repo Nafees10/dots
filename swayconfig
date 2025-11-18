@@ -61,7 +61,7 @@ bindsym Mod4+b exec --no-startup-id Thunar
 # kill focused window
 bindsym Mod1+4 kill
 
-bindsym Ctrl+Escape exec --no-startup-id "TERMINAL=alacritty kickoff"
+bindsym Ctrl+Escape exec --no-startup-id "TERMINAL=alacritty kickoff --history /dev/null"
 
 # change focus
 bindsym Mod1+h focus left
