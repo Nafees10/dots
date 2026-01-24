@@ -42,6 +42,57 @@ dlprox(){
 	fi
 }
 
+rdl() {
+	local max_tries=10
+	local try=0
+
+	while true; do
+		yt-dlp \
+			-o "%(uploader)s-%(title)s [%(id)s].%(ext)s" \
+			--continue \
+			"$@"
+
+		if [[ $? -eq 0 ]]; then
+			return 0
+		fi
+
+		((try++))
+		if (( try >= max_tries )); then
+			echo "Download failed after $max_tries attempts." >&2
+			return 1
+		fi
+
+		echo "Download failed. Retrying in 5 seconds... ($try/$max_tries)" >&2
+		sleep 5
+	done
+}
+
+rproxdl() {
+	local max_tries=10
+	local try=0
+
+	while true; do
+		yt-dlp \
+			--proxy "http://127.0.0.1:18080" \
+			-o "%(uploader)s-%(title)s [%(id)s].%(ext)s" \
+			--continue \
+			"$@"
+
+		if [[ $? -eq 0 ]]; then
+			return 0
+		fi
+
+		((try++))
+		if (( try >= max_tries )); then
+			echo "Download failed after $max_tries attempts." >&2
+			return 1
+		fi
+
+		echo "Download failed. Retrying in 5 seconds... ($try/$max_tries)" >&2
+		sleep 5
+	done
+}
+
 # finds $2 in file $1, replaces with $3. $1 is docx file
 docx-replace(){
 	FILE=$1
