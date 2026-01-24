@@ -20,11 +20,9 @@ gaps outer 0
 
 for_window [shell="xwayland"] title_format "%title <small>[XWayland]</small>"
 
-font pango:Cantarell 14
-
 bindsym $mod+o exec --no-startup-id swaylock -c 282A36
 
-bindsym $mod+m exec --no-startup-id monitor_switch
+bindsym $mod+m move workspace to output up
 
 input type:touchpad {
 	pointer_accel 0.4
@@ -54,8 +52,9 @@ floating_modifier $mod
 
 # start a terminal
 bindsym Mod4+t exec --no-startup-id alacritty
-bindsym Mod4+g exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox
-bindsym Mod4+Shift+g exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox --private-window
+bindsym Mod4+g exec --no-startup-id firefox
+bindsym Mod4+Shift+g exec --no-startup-id firefox --private-window
+bindsym Mod4+Mod1+g exec --no-startup-id firefox --profile .mozilla/firefox/xoy8h6vx.default-release/
 bindsym Mod4+b exec --no-startup-id Thunar
 
 # kill focused window
@@ -79,19 +78,18 @@ bindsym Mod1+b split toggle
 bindsym Mod1+3 fullscreen toggle
 bindsym Mod1+2 floating toggle
 
-workspace 1 output HDMI-A-1
-workspace 2 output HDMI-A-1
-workspace 3 output HDMI-A-1
-workspace 4 output HDMI-A-1
-workspace 5 output eDP-1
-workspace 6 output eDP-1
-workspace 7 output eDP-1
-workspace 8 output eDP-1
-workspace 9 output eDP-1
-workspace 10 output eDP-1
-workspace 11 output eDP-1
-workspace 12 output eDP-1
-
+#workspace 1 output HDMI-A-1
+#workspace 2 output HDMI-A-1
+#workspace 3 output HDMI-A-1
+#workspace 4 output HDMI-A-1
+#workspace 5 output eDP-1
+#workspace 6 output eDP-1
+#workspace 7 output eDP-1
+#workspace 8 output eDP-1
+#workspace 9 output eDP-1
+#workspace 10 output eDP-1
+#workspace 11 output eDP-1
+#workspace 12 output eDP-1
 
 bindsym Mod1+q workspace 1
 bindsym Mod1+w workspace 2
