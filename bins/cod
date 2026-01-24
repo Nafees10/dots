@@ -1,2 +1,0 @@
-#!/bin/sh
-(WINEPREFIX=$HOME/.wineprefixes/codmw2; cd "$HOME/.wineprefixes/codmw2/drive_c/Program Files/Call of Duty - Modern Warfare 2/"; ./iw4x-launcher &)
