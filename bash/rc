@@ -31,9 +31,8 @@ export LIBVIRT_DEFAULT_URI="qemu:///system"
 export QT_QPA_PLATFORMTHEME="qt6ct"
 export GPG_TTY=$(tty)
 export _JAVA_AWT_WM_NONREPARENTING=1
+export ELECTRON_OZONE_PLATFORM_HINT=wayland
 #export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
-
-export CHROME_EXECUTABLE=/usr/bin/chromium
 export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=1
 
-export WINEPREFIX=~/.wineprefixes/default
+export WINEPREFIX="$HOME/.wineprefixes/default"
