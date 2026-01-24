@@ -63,14 +63,12 @@ require('packer').startup(function(use)
 		'weirongxu/plantuml-previewer.vim',
 		requires = { 'aklt/plantuml-syntax', 'tyru/open-browser.vim' }
 	}
-	use 'mfussenegger/nvim-dap'
-	use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio'} }
 end)
 
 -- Themes
 require("notify").setup {}
 vim.notify = require("notify")
-require("nightfox").setup { options = { transparent = true } }
+require("nightfox").setup { options = { transparent = false } }
 vim.cmd("colorscheme carbonfox")
 
 -- Plugins
@@ -196,62 +194,3 @@ vim.lsp.enable(servers)
 require("nvim-treesitter.configs").setup {
 	highlight = { enable = true, additional_vim_regex_highlighting = true }
 }
-
--- DAP
-local dap = require("dap")
-local dapui = require("dapui")
-dap.adapters.gdb = {
-	type = "executable",
-	command = "gdb",
-	args = { "-i", "dap" }
-}
-require("dap.ext.vscode").load_launchjs(nil, { gdb = { "d" } })
-
-dap.configurations.d = {
-	{
-		name = "Launch binary",
-		type = "gdb",
-		request = "launch",
-		program = function()
-			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-		end,
-		cwd = "${workspaceFolder}",
-		stopAtEntry = false,
-	},
-}
-
-dapui.setup{
-	render = {
-		max_type_length = 100
-	}
-}
-
-dap.listeners.after.event_initialized["dapui_config"] = function()
-	dapui.open()
-end
-dap.listeners.before.event_terminated["dapui_config"] = function()
-	dapui.close()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-	dapui.close()
-end
-
-vim.keymap.set("n", "<leader>du", function() dapui.toggle() end)
-vim.keymap.set("n", "<leader>de", function() dapui.eval() end)
-
-vim.keymap.set("n", "<F5>", function() dap.continue() end)
-vim.keymap.set("n", "<F10>", function() dap.step_over() end)
-vim.keymap.set("n", "<F11>", function() dap.step_into() end)
-vim.keymap.set("n", "<F12>", function() dap.step_out() end)
-vim.keymap.set("n", "<F9>", function() dap.toggle_breakpoint() end)
-
--- c_sharp
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "cs",
-  callback = function()
-    vim.opt_local.expandtab = true
-    vim.opt_local.shiftwidth = 4
-    vim.opt_local.softtabstop = 4
-    vim.opt_local.tabstop = 4
-  end,
-})
