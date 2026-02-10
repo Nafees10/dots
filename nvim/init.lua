@@ -56,7 +56,11 @@ require('packer').startup(function(use)
 	use 'EdenEast/nightfox.nvim'
 	use 'neovim/nvim-lspconfig'
 	use 'SmiteshP/nvim-navic'
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		branch = "master",
+		run = ':TSUpdate'
+	}
 	use 'folke/which-key.nvim'
 	use 'echasnovski/mini.completion'
 	use {
