@@ -8,6 +8,16 @@ vim.g.maplocalleader = ","
 
 vim.opt.mouse = ""
 vim.opt.colorcolumn = "80"
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "cs",
+	callback = function()
+		vim.opt_local.colorcolumn = "120"
+		vim.opt_local.expandtab = true
+		vim.opt_local.shiftwidth = 4
+		vim.opt_local.softtabstop = 4
+		vim.opt_local.tabstop = 4
+	end,
+})
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -58,7 +68,7 @@ require('packer').startup(function(use)
 	use 'SmiteshP/nvim-navic'
 	use {
 		'nvim-treesitter/nvim-treesitter',
-		branch = "master",
+		branch = 'master',
 		run = ':TSUpdate'
 	}
 	use 'folke/which-key.nvim'
@@ -154,9 +164,34 @@ vim.keymap.set('i', '<CR>', function()
 end, { expr = true, silent = true })
 
 -- LSP
+local servers = {
+	"serve_d", "clangd", "gopls", "pyright", "jdtls",
+	"ts_ls", "jsonls", "eslint", "cssls", "html", "roslyn_ls"
+}
+local servers_format_enabled = {
+	roslyn_ls = true,
+	gopls = true
+}
+
 local on_attach = function(client, bufnr)
 	if client.server_capabilities.documentSymbolProvider then
 		navic.attach(client, bufnr)
+	end
+	if client.server_capabilities.documentFormattingProvider
+		and servers_format_enabled[client.name]
+	then
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			buffer = bufnr,
+			callback = function()
+				vim.lsp.buf.format({
+					bufnr = bufnr,
+					filter = function(c)
+						return c.name == client.name
+					end,
+					timeout_ms = 3000,
+				})
+			end,
+		})
 	end
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 	local map = vim.keymap.set
@@ -176,16 +211,13 @@ local on_attach = function(client, bufnr)
 	map("n", "<leader>gi", vim.lsp.buf.implementation, opts)
 	map("n", "<leader>gt", vim.lsp.buf.type_definition, opts)
 	map("n", "<leader>gs", vim.lsp.buf.signature_help, opts)
+	vim.keymap.set("n", "<leader>gr", fzf.lsp_references, opts)
 
 	map("n", "<leader>e", vim.diagnostic.open_float, opts)
 	map("n", "<leader>r", vim.lsp.buf.rename, opts)
 	map("n", "<leader>a", vim.lsp.buf.code_action, opts)
 end
 
-local servers = {
-	"serve_d", "clangd", "gopls", "pyright", "jdtls",
-	"ts_ls", "jsonls", "eslint", "cssls", "html"
-}
 for _, server in ipairs(servers) do
 	vim.lsp.config(server, {
 		on_attach = on_attach,
