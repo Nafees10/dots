@@ -6,8 +6,8 @@ exec --no-startup-id mako
 
 output * bg /home/$USER/Pictures/wallpapers/02.png fill
 
-output eDP-1 scale 1.25 position 0,0
-output HDMI-A-1 position 0,-2000
+output eDP-1 scale 1.25 position 0,2000
+output HDMI-A-1 position 0,0
 
 exec --no-startup-id rfkill block bluetooth
 
@@ -19,6 +19,7 @@ gaps inner 4
 gaps outer 0
 
 for_window [shell="xwayland"] title_format "%title <small>[XWayland]</small>"
+xwayland disabled
 
 bindsym $mod+o exec --no-startup-id swaylock -c 282A36
 
@@ -29,6 +30,7 @@ input type:touchpad {
 	natural_scroll enabled
 	tap enabled
 	dwt disabled
+	drag_lock disabled
 }
 
 exec swayidle -w \
