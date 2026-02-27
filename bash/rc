@@ -25,6 +25,8 @@ if [ -f ~/.bash_aliases ]; then
 	.	~/.bash_aliases
 fi
 export STEAM_FRAME_FORCE_CLOSE=1
+export GDK_SCALE=1
+export GDK_DPI_SCALE=1
 export PATH=$PATH:$HOME/.local/bin:$HOME/.dotnet/tools
 export EDITOR=nvim
 export LIBVIRT_DEFAULT_URI="qemu:///system"
