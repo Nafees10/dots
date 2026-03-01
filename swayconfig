@@ -6,8 +6,11 @@ exec --no-startup-id mako
 
 output * bg /home/$USER/Pictures/wallpapers/02.png fill
 
-output eDP-1 scale 1.25 position 0,2000
-output HDMI-A-1 position 0,0
+#output eDP-1 scale 1.25 position 0,2000
+#output HDMI-A-1 position 0,0
+
+output eDP-1 scale 1.25 position 2000,0
+output HDMI-A-1 transform 270 position 0,0
 
 exec --no-startup-id rfkill block bluetooth
 
@@ -23,7 +26,7 @@ xwayland disabled
 
 bindsym $mod+o exec --no-startup-id swaylock -c 282A36
 
-bindsym $mod+m move workspace to output up
+bindsym $mod+m move workspace to output left
 
 input type:touchpad {
 	pointer_accel 0.4
@@ -80,18 +83,18 @@ bindsym Mod1+b split toggle
 bindsym Mod1+3 fullscreen toggle
 bindsym Mod1+2 floating toggle
 
-#workspace 1 output HDMI-A-1
-#workspace 2 output HDMI-A-1
-#workspace 3 output HDMI-A-1
-#workspace 4 output HDMI-A-1
-#workspace 5 output eDP-1
-#workspace 6 output eDP-1
-#workspace 7 output eDP-1
-#workspace 8 output eDP-1
-#workspace 9 output eDP-1
-#workspace 10 output eDP-1
-#workspace 11 output eDP-1
-#workspace 12 output eDP-1
+workspace 1 output HDMI-A-1
+workspace 5 output HDMI-A-1
+workspace 9 output HDMI-A-1
+workspace 2 output eDP-1
+workspace 3 output eDP-1
+workspace 4 output eDP-1
+workspace 6 output eDP-1
+workspace 7 output eDP-1
+workspace 8 output eDP-1
+workspace 10 output eDP-1
+workspace 11 output eDP-1
+workspace 12 output eDP-1
 
 bindsym Mod1+q workspace 1
 bindsym Mod1+w workspace 2
