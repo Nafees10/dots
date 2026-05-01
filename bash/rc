@@ -17,6 +17,7 @@ complete -cf doas
 shopt -s checkwinsize
 shopt -s expand_aliases
 shopt -s histappend
+shopt -s globstar
 # disable job control (that Ctrl+Z thing)
 set +m
 
