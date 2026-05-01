@@ -11,7 +11,7 @@ vim.opt.colorcolumn = "80"
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "cs",
 	callback = function()
-		vim.opt_local.colorcolumn = "120"
+		vim.opt_local.colorcolumn = "100"
 		vim.opt_local.expandtab = true
 		vim.opt_local.shiftwidth = 4
 		vim.opt_local.softtabstop = 4
@@ -66,11 +66,7 @@ require('packer').startup(function(use)
 	use 'EdenEast/nightfox.nvim'
 	use 'neovim/nvim-lspconfig'
 	use 'SmiteshP/nvim-navic'
-	use {
-		'nvim-treesitter/nvim-treesitter',
-		branch = 'master',
-		run = ':TSUpdate'
-	}
+	use "romus204/tree-sitter-manager.nvim"
 	use 'folke/which-key.nvim'
 	use 'echasnovski/mini.completion'
 	use {
@@ -98,6 +94,9 @@ vim.keymap.set('n', '<leader>fg', fzf.live_grep)
 vim.keymap.set('n', '<leader>fb', fzf.buffers)
 vim.keymap.set('n', '<leader>fh', fzf.resume)
 vim.keymap.set('n', '<leader>fz', fzf.global)
+
+-- Treesitter
+require("tree-sitter-manager").setup()
 
 -- Lualine
 require("lualine").setup {
@@ -225,8 +224,3 @@ for _, server in ipairs(servers) do
 end
 
 vim.lsp.enable(servers)
-
--- Treesitter
-require("nvim-treesitter.configs").setup {
-	highlight = { enable = true, additional_vim_regex_highlighting = true }
-}
