@@ -22,7 +22,7 @@ update_ps1() {
 	if [[ $exit_code -ne 0 ]]; then
 		status=" ${red}(exit: $exit_code)${reset}"
 	fi
-	PS1="${cwd}${git_branch}${status}\n${gray}> ${reset}"
+	PS1="\[\e]0;\u@\h \w\a\]${cwd}${git_branch}${status}\n${gray}> ${reset}"
 }
 PROMPT_COMMAND=update_ps1
 
