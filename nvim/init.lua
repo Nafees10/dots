@@ -73,6 +73,7 @@ require('packer').startup(function(use)
 		'weirongxu/plantuml-previewer.vim',
 		requires = { 'aklt/plantuml-syntax', 'tyru/open-browser.vim' }
 	}
+	use "lervag/vimtex"
 end)
 
 -- Themes
