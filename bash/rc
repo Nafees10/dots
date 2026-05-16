@@ -2,16 +2,34 @@
 [[ $- != *i* ]] && return
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
-PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}  ${PWD/#$HOME/\~}\007"'
-
-PS1='\[\e[1;30;44m\] \u \[\e[0;34;104m\]\[\e[1;30;104m\] \h \[\e[0;94;42m\]\[\e[0;30;42m\] \W \[\e[0;32m\]\[\e[0m\] '
+parse_git_branch() {
+	git branch --show-current 2>/dev/null
+}
+update_ps1() {
+	local exit_code=$?
+	local reset='\[\e[0m\]'
+	local blue='\[\e[34m\]'
+	local green='\[\e[32m\]'
+	local red='\[\e[31m\]'
+	local gray='\[\e[90m\]'
+	local cwd="${blue}\w${reset}"
+	local git_branch
+	git_branch=$(parse_git_branch)
+	if [[ -n "$git_branch" ]]; then
+		git_branch=" ${green}[$git_branch]${reset}"
+	fi
+	local status=""
+	if [[ $exit_code -ne 0 ]]; then
+		status=" ${red}(exit: $exit_code)${reset}"
+	fi
+	PS1="${cwd}${git_branch}${status}\n${gray}> ${reset}"
+}
+PROMPT_COMMAND=update_ps1
 
 alias ls='ls --color=auto'
 alias grep='grep --colour=auto'
 
 alias cp="cp -i" # confirm before overwriting something
-
-#xhost +local:root > /dev/null 2>&1
 
 complete -cf doas
 shopt -s checkwinsize
@@ -22,9 +40,7 @@ shopt -s globstar
 set +m
 
 export HISTCONTROL=ignoreboth:erasedups
-if [ -f ~/.bash_aliases ]; then
-	.	~/.bash_aliases
-fi
+
 export STEAM_FRAME_FORCE_CLOSE=1
 export GDK_SCALE=1
 export GDK_DPI_SCALE=1
@@ -37,5 +53,8 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export ELECTRON_OZONE_PLATFORM_HINT=wayland
 #export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
 export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=1
-
 export WINEPREFIX="$HOME/.wineprefixes/default"
+
+if [ -f ~/.bash_aliases ]; then
+	.	~/.bash_aliases
+fi
