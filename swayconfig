@@ -21,8 +21,8 @@ smart_gaps on
 gaps inner 4
 gaps outer 0
 
-for_window [shell="xwayland"] title_format "%title <small>[XWayland]</small>"
-xwayland disabled
+for_window [shell="xwayland"] title_format "%title [XWayland]"
+#xwayland disabled
 
 bindsym $mod+o exec --no-startup-id swaylock -c 282A36
 
