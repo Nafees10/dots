@@ -166,7 +166,8 @@ end, { expr = true, silent = true })
 -- LSP
 local servers = {
 	"serve_d", "clangd", "gopls", "pyright", "jdtls",
-	"ts_ls", "jsonls", "eslint", "cssls", "html", "roslyn_ls"
+	"ts_ls", "jsonls", "eslint", "cssls", "html", "roslyn_ls",
+	"vue_ls"
 }
 local servers_format_enabled = {
 	roslyn_ls = true,
