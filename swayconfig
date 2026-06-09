@@ -9,7 +9,7 @@ output * bg /home/$USER/Pictures/wallpapers/02.png fill
 #output eDP-1 scale 1.25 position 0,2000
 #output HDMI-A-1 position 0,0
 
-output eDP-1 scale 1.25 position 2000,0
+output eDP-1 scale 1.25 position 1400,0
 output HDMI-A-1 transform 270 position 0,0
 
 exec --no-startup-id rfkill block bluetooth
